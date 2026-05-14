@@ -9,7 +9,7 @@ import Contact from './pages/Contact'
 
 function App() {
   return (
-    <Router basename="/adb-llp">
+    <Router>
       <div className="min-h-screen bg-white">
         <Navbar />
         <Routes>
