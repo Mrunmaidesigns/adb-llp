@@ -19,7 +19,7 @@ export default function WhatWeSolve() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-accent font-semibold text-xs uppercase tracking-widest">What We Solve</span>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-semibold text-white leading-[0.95] mt-4 mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-semibold text-white leading-[0.95] mt-4 mb-6">
               Growing but feeling <span className="text-accent">messy</span>?
             </h1>
             <p className="text-white/50 text-base max-w-3xl leading-relaxed">

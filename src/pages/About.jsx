@@ -17,7 +17,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-accent font-semibold text-xs uppercase tracking-widest">About Us</span>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-semibold text-white leading-[0.95] mt-4 mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-semibold text-white leading-[0.95] mt-4 mb-6">
               Who We <span className="text-accent">Are</span>
             </h1>
             <p className="text-white/50 text-base max-w-2xl leading-relaxed">
@@ -37,7 +37,7 @@ export default function About() {
 
             <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:pt-8">
               <span className="text-accent font-semibold text-xs uppercase tracking-widest">Our Story</span>
-              <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-dark mt-4 mb-8 leading-[0.95]">
+              <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-dark mt-4 mb-8 leading-[0.95]">
                 Building structured businesses since 2018
               </h2>
               <div className="space-y-5 text-gray-500 text-base leading-relaxed mb-12">
@@ -78,7 +78,7 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <span className="text-accent font-semibold text-xs uppercase tracking-widest">Our Philosophy</span>
-              <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-white mt-4 mb-8 leading-[0.95]">
+              <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-white mt-4 mb-8 leading-[0.95]">
                 Innovate to <span className="text-accent">Evolve</span>
               </h2>
               <p className="text-white/50 text-base leading-relaxed mb-10 max-w-lg">
@@ -120,7 +120,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-accent font-semibold text-xs uppercase tracking-widest">Our Culture</span>
-            <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-dark mt-4 leading-[0.95]">
+            <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-dark mt-4 leading-[0.95]">
               What drives us forward
             </h2>
           </motion.div>
@@ -135,7 +135,7 @@ export default function About() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="bg-white rounded-xl p-10 border border-gray-100 hover:border-accent/30 transition-all duration-300"
               >
-                <div className="text-accent font-sans font-semibold text-5xl mb-6">{value.number}</div>
+                <div className="text-accent font-sans font-semibold text-3xl lg:text-4xl mb-6">{value.number}</div>
                 <h3 className="text-xl font-sans font-semibold text-dark mb-4">{value.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{value.description}</p>
               </motion.div>

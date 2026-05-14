@@ -59,10 +59,16 @@ export default function Home() {
     <main>
       {/* Hero Section - Areto Style */}
       <section className="relative bg-dark min-h-screen flex items-center overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-16 lg:pt-36 lg:pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div className="relative order-2 lg:order-1">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop&q=80" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-dark/85"></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-16 lg:pt-40 lg:pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+            {/* Left: Heading + Description + CTA */}
+            <div className="lg:col-span-8 order-1">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -71,53 +77,43 @@ export default function Home() {
                   exit={{ opacity: 0, y: -40 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <span className="inline-block bg-accent/20 text-accent text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-full mb-8">
-                    Innovate to Evolve
-                  </span>
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-semibold text-white leading-[0.95] mb-6">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-semibold text-white leading-[0.95] mb-8 max-w-4xl">
                     {slides[currentSlide].title}<br />
                     <span className="text-accent">{slides[currentSlide].highlight}</span>
                   </h1>
-                  <p className="text-white/50 text-base leading-relaxed mb-8 max-w-lg">
+
+                  <p className="text-white/50 text-base leading-relaxed max-w-xl mb-10">
                     {slides[currentSlide].subtitle}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-10">
-                    {slides[currentSlide].tags.map((tag) => (
-                      <span key={tag} className="bg-white/10 text-white/70 text-xs font-medium px-4 py-1.5 rounded-full">{tag}</span>
-                    ))}
-                  </div>
-                  <Link to="/contact" className="inline-flex items-center gap-2 bg-primary hover:bg-accent text-white px-10 py-5 rounded-full font-semibold text-sm uppercase tracking-wider transition-all duration-300 group">
+
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-3 bg-accent hover:bg-white hover:text-dark text-white px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wider transition-all duration-300 group"
+                  >
                     Book a Consultation
                     <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
+
+                  {/* Slider Controls */}
+                  <div className="flex items-center gap-4 mt-10">
+                    <div className="flex gap-2">
+                      {slides.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentSlide(i)}
+                          className={`h-1 rounded-full transition-all duration-500 ${i === currentSlide ? 'w-10 bg-accent' : 'w-5 bg-white/20 hover:bg-white/40'}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
               </AnimatePresence>
-
-              {/* Slider Controls */}
-              <div className="flex items-center gap-4 mt-12">
-                <div className="flex gap-2">
-                  {slides.map((_, i) => (
-                    <button key={i} onClick={() => setCurrentSlide(i)} className={`h-1 rounded-full transition-all duration-500 ${i === currentSlide ? 'w-10 bg-accent' : 'w-5 bg-white/20 hover:bg-white/40'}`} />
-                  ))}
-                </div>
-                <div className="flex gap-2 ml-4">
-                  {slides.map((slide, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentSlide(i)}
-                      className={`w-14 h-14 rounded-lg overflow-hidden transition-all duration-300 ${i === currentSlide ? 'ring-2 ring-accent ring-offset-2 ring-offset-dark' : 'opacity-50 hover:opacity-80'}`}
-                    >
-                      <img src={i === 0 ? slide.thumb1 : slide.thumb2} alt="" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            {/* Right Image */}
-            <div className="hidden lg:block relative order-1 lg:order-2">
+            {/* Right: Floating Images */}
+            <div className="lg:col-span-4 order-2 relative hidden lg:block">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -125,16 +121,26 @@ export default function Home() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.6 }}
-                  className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden"
+                  className="relative"
                 >
-                  <img src={slides[currentSlide].image} alt="ADB Consulting" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
+                  <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-4">
+                    <img src={slides[currentSlide].image} alt="ADB Consulting" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/30 to-transparent"></div>
+                  </div>
+
+                  {/* Small floating image */}
+                  <div className="absolute -bottom-6 -left-6 w-28 h-28 rounded-xl overflow-hidden border-4 border-dark shadow-xl">
+                    <img src={slides[currentSlide].thumb1} alt="" className="w-full h-full object-cover" />
+                  </div>
+
+                  {/* Plus badge */}
+                  <div className="absolute -top-4 -right-4 w-12 h-12 bg-accent rounded-full flex items-center justify-center shadow-lg">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </div>
                 </motion.div>
               </AnimatePresence>
-              <div className="absolute -bottom-6 -left-6 bg-accent rounded-xl p-6">
-                <p className="text-white font-sans font-semibold text-2xl">2018</p>
-                <p className="text-white/80 text-xs">Established</p>
-              </div>
             </div>
           </div>
         </div>
@@ -145,7 +151,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mb-20">
             <span className="text-accent font-semibold text-xs uppercase tracking-widest">What We Do</span>
-            <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-dark mt-4 mb-6 leading-[0.95]">
+            <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-dark mt-4 mb-6 leading-[0.95]">
               Unlock growth opportunities, streamline operations, and achieve measurable results
             </h2>
             <p className="text-gray-500 text-base leading-relaxed">
@@ -165,7 +171,7 @@ export default function Home() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-6 lg:gap-12">
-                    <span className="text-accent font-sans font-semibold text-4xl lg:text-5xl">{service.number}</span>
+                    <span className="text-accent font-sans font-semibold text-2xl lg:text-3xl">{service.number}</span>
                     <div>
                       <h3 className="text-xl lg:text-2xl font-sans font-semibold text-dark mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
                       <p className="text-gray-500 text-base">{service.description}</p>
@@ -222,7 +228,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
             <div>
               <span className="text-accent font-semibold text-xs uppercase tracking-widest">Our Clients</span>
-              <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-dark mt-4 mb-8 leading-[0.95]">
+              <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-dark mt-4 mb-8 leading-[0.95]">
                 Our clients are ambitious businesses that understand the value of efficiency.
               </h2>
               <Link to="/contact" className="inline-flex items-center gap-2 bg-primary hover:bg-accent text-white px-8 py-4 rounded-full font-semibold text-xs uppercase tracking-wider transition-all duration-300 group">
@@ -270,7 +276,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mb-20">
             <span className="text-accent font-semibold text-xs uppercase tracking-widest">Our Approach</span>
-            <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-white mt-4 mb-6 leading-[0.95]">
+            <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-white mt-4 mb-6 leading-[0.95]">
               Strategic business consulting designed to maximize long-term success
             </h2>
           </div>
@@ -336,7 +342,7 @@ export default function Home() {
 
             <div className="lg:pt-8">
               <span className="text-accent font-semibold text-xs uppercase tracking-widest">About ADB</span>
-              <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-dark mt-4 mb-8 leading-[0.95]">
+              <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-dark mt-4 mb-8 leading-[0.95]">
                 Achieve sustainable growth through data-driven business consulting expertise
               </h2>
               <p className="text-gray-500 text-base leading-relaxed mb-10">
@@ -371,7 +377,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-accent font-semibold text-xs uppercase tracking-widest">Our Impact</span>
-            <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-dark mt-4 mb-6 leading-[0.95]">
+            <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-dark mt-4 mb-6 leading-[0.95]">
               Unlocking business growth with expert consulting solutions
             </h2>
             <p className="text-gray-500 text-base leading-relaxed">
@@ -389,7 +395,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="bg-white rounded-xl p-10 text-center border border-gray-100 hover:border-accent/30 transition-all duration-300 group"
               >
-                <div className="text-5xl font-sans font-semibold text-primary mb-4 group-hover:text-accent transition-colors">{stat.value}</div>
+                <div className="text-3xl lg:text-4xl font-sans font-semibold text-primary mb-4 group-hover:text-accent transition-colors">{stat.value}</div>
                 <h3 className="text-lg font-sans font-semibold text-dark mb-3">{stat.label}</h3>
                 <p className="text-gray-400 text-xs">{stat.description}</p>
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mt-6 group-hover:bg-accent transition-colors">
@@ -416,7 +422,7 @@ export default function Home() {
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-white leading-[0.95] mb-8">
+            <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-white leading-[0.95] mb-8">
               Let's make great work together.
             </h2>
             <Link to="/contact" className="inline-flex items-center gap-2 bg-accent hover:bg-white hover:text-dark text-white px-10 py-5 rounded-full font-semibold text-sm transition-all duration-300 group">
@@ -434,7 +440,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-sans font-semibold text-white leading-[0.95]">
+              <h2 className="text-3xl lg:text-4xl font-sans font-semibold text-white leading-[0.95]">
                 Build a business that runs on <span className="text-accent">systems</span> — not stress.
               </h2>
             </div>
